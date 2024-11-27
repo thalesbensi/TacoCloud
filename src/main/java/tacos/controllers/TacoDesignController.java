@@ -3,12 +3,10 @@ package tacos.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import tacos.entities.Ingredient;
 import tacos.entities.Taco;
+import tacos.entities.TacoOrder;
 import tacos.enums.Type;
 
 import java.util.Arrays;
@@ -20,6 +18,21 @@ import java.util.stream.Collectors;
 @RequestMapping("/design")
 @Controller
 public class TacoDesignController {
+
+    @GetMapping()
+    public String showDesignForm() {
+        return "design";
+    }
+
+    @ModelAttribute(name = "taco")
+    public Taco taco(){
+        return new Taco();
+    }
+
+    @ModelAttribute(name = "tacoOrder")
+    public TacoOrder tacoOrder(){
+        return new TacoOrder();
+    }
 
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
@@ -43,21 +56,18 @@ public class TacoDesignController {
         }
     }
 
-    @ModelAttribute(name = "taco")
-    public Taco taco(){
-        return new Taco();
-    }
-
-    @GetMapping()
-    public String showDesignForm() {
-        return "design";
-    }
-
     private Iterable<Ingredient> filterByType(
             List<Ingredient> ingredients, Type type) {
                 return ingredients
                         .stream()
                         .filter(x -> x.getType().equals(type))
                         .collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder) {
+        tacoOrder.addTaco(taco);
+        log.info("Processing taco: {}", taco);
+        return "redirect:/orders/current";
     }
 }
