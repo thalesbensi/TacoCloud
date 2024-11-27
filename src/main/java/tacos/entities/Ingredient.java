@@ -1,12 +1,12 @@
 package tacos.entities;
 
 import lombok.Data;
-import tacos.enums.IngredientType;
+import tacos.enums.Type;
 
 @Data
 public class Ingredient {
 
     private final String id;
     private final String name;
-    private final IngredientType type;
+    private final Type type;
 }

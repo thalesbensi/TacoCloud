@@ -1,6 +1,6 @@
 package tacos.enums;
 
-public enum IngredientType {
+public enum Type {
     WRAP,
     PROTEIN,
     VEGGIES,
