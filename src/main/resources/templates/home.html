@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="us"
+<html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th = "http://www.thymeleaf.org">
 <head>
@@ -10,5 +10,9 @@
 <body>
 <h1>Welcome to...</h1>
 <img th:src="@{/images/TacoCloud.png}" alt="Logo"/>
+
+<form th:action="@{/design}" method="get">
+    <button type="submit">Design your tacos</button>
+</form>
 </body>
 </html>
