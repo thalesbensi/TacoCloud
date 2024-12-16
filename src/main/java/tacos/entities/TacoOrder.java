@@ -16,11 +16,16 @@ import java.util.List;
 @Data
 public class TacoOrder implements Serializable {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Date placedAt;
+
+    @ManyToOne
+    private User user;
 
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;

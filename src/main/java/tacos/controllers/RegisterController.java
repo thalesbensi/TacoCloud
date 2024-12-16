@@ -13,13 +13,13 @@ import tacos.security.RegistrationForm;
 @RequestMapping("/register")
 public class RegisterController {
 
+    private UserRepository userRepo;
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping
     public String showRegisterForm(){
         return "register";
     }
-
-    private UserRepository userRepo;
-    private PasswordEncoder passwordEncoder;
 
     public RegisterController(UserRepository userRepo, PasswordEncoder passwordEncoder){
         this.userRepo = userRepo;

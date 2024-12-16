@@ -1,15 +1,10 @@
 package tacos.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +16,9 @@ import java.util.Collections;
 @Data
 @NoArgsConstructor(force = true)
 @RequiredArgsConstructor
+@Table(name = "users")
 public class User implements UserDetails {
+    private static final long serialVersionID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
